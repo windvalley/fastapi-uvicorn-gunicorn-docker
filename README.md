@@ -3,8 +3,8 @@
 
 ## 文件结构说明
 
-- Dockerfile
-    默认使用Python3.8作为基础镜像.
+- Dockerfile    
+  默认使用Python3.8作为基础镜像.
 - app/main.py
     项目的示例入口模块.
 - app/prestart.sh
@@ -78,16 +78,18 @@ docker images
 
 ## 基于基础镜像构建项目镜像
 
-### 创建项目目录, 并进入到项目目录
+### 创建并进入到项目目录
 ```bash
 mkdir opsapi && cd opsapi
 ```
 
 ### 创建项目的Dockerfile
+```bash
 cat > Dockerfile <<-EOF
     FROM fastapi:python3.8
     COPY ./app /app
 EOF
+```
 
 ### 创建项目源代码目录
 ```bash
