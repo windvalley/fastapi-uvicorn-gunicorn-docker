@@ -4,18 +4,18 @@
 ## 文件结构说明
 
 - Dockerfile    
-  默认使用Python3.8作为基础镜像.
-- app/main.py
-  项目的示例入口模块.
-- app/prestart.sh
-  项目的示例预执行脚本, 在启动fastapi前执行的脚本.
-- gunicorn_conf.py
-  gunicorn的配置文件, 使用将在下面介绍的环境变量进行配置, 并设置有默认值.
-- start.sh
-  容器默认的启动命令, 用于生产环境.
-- start-reload.sh
-  用于在开发环境下启动容器, 只会运行uvicorn, 不会启动gunicorn,
-  gunicorn_conf.py文件不起作用, 不过将在下面说明的环境变量都有效.
+    默认使用Python3.8作为基础镜像.
+- app/main.py    
+    项目的示例入口模块.
+- app/prestart.sh    
+    项目的示例预执行脚本, 在启动fastapi前执行的脚本.
+- gunicorn_conf.py    
+    gunicorn的配置文件, 使用将在下面介绍的环境变量进行配置, 并设置有默认值.
+- start.sh    
+    容器默认的启动命令, 用于生产环境.
+- start-reload.sh    
+    用于在开发环境下启动容器, 只会运行uvicorn, 不会启动gunicorn,
+    gunicorn_conf.py文件不起作用, 不过将在下面说明的环境变量都有效.
 
 ## 启动容器时可设置的环境变量说明
 
