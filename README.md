@@ -72,6 +72,10 @@ GUNICORN_CONF="/app/your_custom_gunicorn_conf.py"
 ## 构建基础镜像
 
 ```bash
+git clone git@github.com:windvalley/fastapi-uvicorn-gunicorn-docker.git
+
+cd fastapi-uvicorn-gunicorn-docker
+
 docker build -t fastapi:python3.8 .
 docker images
 ```
@@ -98,9 +102,9 @@ mkdir app
 
 ### 将fastapi项目代码放到app目录下
 
-如果不放置项目代码, `/app`下将是基础镜像提供的示例文件`main.py`和`prestart.sh`;
+如果不放置项目代码, 容器内的`/app`下将是基础镜像提供的示例文件`main.py`和`prestart.sh`;
 
-你的项目代码中的入口文件和预启动文件建议保持main.py和prestart.sh的文件命名,
+你的项目代码中的入口文件和预启动文件建议保持文件名`main.py`和`prestart.sh`,
 否则你在启动容器时需要`-e`参数设置相关的环境变量.
 
 ### 构建项目镜像
