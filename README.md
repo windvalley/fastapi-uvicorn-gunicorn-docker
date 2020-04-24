@@ -63,7 +63,7 @@ GUNICORN_CONF="/app/your_custom_gunicorn_conf.py"
 
 环境变量使用方式举例:
 
-`docker run -d --name container_name -p80:80 -e WEB_CONCURRENCY="2" image_name`
+`docker container run -d --name container_name -p80:80 -e WEB_CONCURRENCY="2" image_name`
 
 
 使用说明
@@ -76,8 +76,8 @@ git clone git@github.com:windvalley/fastapi-uvicorn-gunicorn-docker.git
 
 cd fastapi-uvicorn-gunicorn-docker
 
-docker build -t fastapi:python3.8 .
-docker images
+docker image build -t fastapi:python3.8 .
+docker image ls
 ```
 
 ## 基于基础镜像构建项目镜像
@@ -110,8 +110,8 @@ mkdir app
 ### 构建项目镜像
 
 ```bash
-docker build -t opsapi:0.1 .
-docker images
+docker image build -t opsapi:0.1 .
+docker image ls
 ```
 
 
@@ -120,13 +120,30 @@ docker images
 ### 生产环境下运行容器
 
 ```bash
-docker run -d --name opsapi -p80:80 -e WEB_CONCURRENCY="6" opsapi:0.1
+docker container run -d --name opsapi \
+    -p 80:80 \
+    -e WEB_CONCURRENCY="6" \
+    opsapi:0.1
+```
+
+`fastapi`访问日志和错误日志写到宿主机上的如下目录:
+```bash
+docker container inspect opsapi -f '{{.Mounts}}'|cut -d' ' -f3
 ```
 
 ### 开发环境下运行容器
 
 ```bash
-docker run -d --name opsapi -p80:80 -e LOG_LEVEL="debug" -v $PWD/app:/app opsapi:0.1 /start-reload.sh
+docker container run -d --name opsapi \
+    -p 80:80 \
+    -e LOG_LEVEL="debug" \
+    -v $PWD/app:/app \
+    opsapi:0.1 /start-reload.sh
+```
+
+查看`fastapi`访问日志和错误日志:
+```bash
+docker container logs opsapi
 ```
 
 ## 测试

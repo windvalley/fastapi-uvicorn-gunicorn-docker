@@ -10,6 +10,9 @@ COPY ./gunicorn_conf.py /gunicorn_conf.py
 COPY ./start-reload.sh /start-reload.sh
 RUN chmod +x /start-reload.sh
 
+RUN mkdir -p /var/log/gunicorn
+VOLUME /var/log/gunicorn
+
 COPY ./app /app
 WORKDIR /app/
 

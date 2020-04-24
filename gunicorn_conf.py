@@ -27,7 +27,8 @@ loglevel = use_loglevel
 workers = web_concurrency
 bind = use_bind
 keepalive = 120
-errorlog = "-"
+accesslog = "/var/log/gunicorn/access.log"
+errorlog = "/var/log/gunicorn/error.log"
 
 # For debugging and testing
 log_data = {
