@@ -22,15 +22,17 @@
 ```
 # Gunicorn要导入的python模块名称;
 # 值为main对应容器内目录结构是/app/main.py;
-# 值为app.main则对应容器内目录结构为/app/app/main.py
-MODULE_NAME="main"
+# 值为app.main则对应容器内目录结构为/app/app/main.py;
+# 默认为app.main优先, 如不存在则默认main.
+MODULE_NAME="app.main"
 
-# 项目代码入口文件main.py中的FastAPI实例的名称.
+# 项目代码入口文件main.py中的FastAPI实例的名称;
+# 默认为app.
 VARIABLE_NAME="app"
 
 # 值默认是MODULE_NAME:VARIABLE_NAME, 可以根据实际情况自定义,
-# 自定义值后会忽略MODULE_NAME和VARIABLE_NAME变量.
-APP_MODULE="main:app"
+# 自定义值后会忽略MODULE_NAME和VARIABLE_NAME变量的定义.
+APP_MODULE="app.main:app"
 
 # 宿主机每个CPU开启几个worker, 默认是1, 如果宿主机只有一个cpu, 则将开启2个worker;
 # 也可以自定义为浮点数, 比如0.5, 此时如果宿主机是4核cpu, 则只会开启2个worker.
@@ -93,6 +95,14 @@ cat > Dockerfile <<-EOF
     FROM fastapi:python3.8
     COPY ./app /app
 EOF
+```
+或者跳过构建基础镜像的步骤, 直接从docker hub上引用该镜像:
+```bash
+cat > Dockerfile <<-EOF
+    FROM windvalley/fastapi-uvicorn-gunicorn:python3.8
+    COPY ./app /app
+EOF
+
 ```
 
 ### 创建项目源代码目录
